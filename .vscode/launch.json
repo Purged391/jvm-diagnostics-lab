@@ -1,0 +1,103 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CPU with sleep (JFR)",
+            "request": "launch",
+            "mainClass": "Main",
+            "args": [
+                "cpu-sleep"
+            ],
+            "vmArgs": "-XX:StartFlightRecording=name=cpu-sleep,settings=profile,dumponexit=true,filename=cpu-sleep.jfr",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "CPU workload (JFR)",
+            "request": "launch",
+            "mainClass": "Main",
+            "args": [
+                "cpu"
+            ],
+            "vmArgs": "-XX:StartFlightRecording=name=cpu,settings=profile,dumponexit=true,filename=cpu.jfr",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Allocation worker (GC)",
+            "request": "launch",
+            "mainClass": "Main",
+            "args": [
+                "allocation-worker"
+            ],
+            "vmArgs": "-Xms64m -Xmx64m -Xlog:gc:file=gc-allocation.log:uptime,level,tags -XX:StartFlightRecording=name=allocation-lab,settings=profile,duration=20s,filename=allocation.jfr",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Retained arrays + allocation (GC)",
+            "request": "launch",
+            "mainClass": "Main",
+            "args": [
+                "heavy-allocation-worker"
+            ],
+            "vmArgs": "-Xms64m -Xmx64m -Xlog:gc:file=gc-heavy-allocation.log:uptime,level,tags -XX:StartFlightRecording=name=heavy-allocation-lab,settings=profile,duration=20s,filename=heavy-allocation.jfr",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Lock holder (JFR contention)",
+            "request": "launch",
+            "mainClass": "Main",
+            "args": [
+                "lock-holder"
+            ],
+            "vmArgs": "-XX:StartFlightRecording=name=contention,settings=profile,dumponexit=true,filename=contention.jfr",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Intentional deadlock (stop manually)",
+            "request": "launch",
+            "mainClass": "Main",
+            "args": [
+                "dead-lock"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "java",
+            "name": "Main (choose scenario)",
+            "request": "launch",
+            "mainClass": "Main",
+            "args": [
+                "${input:runCase}"
+            ],
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "runCase",
+            "type": "pickString",
+            "description": "Select the scenario to run",
+            "options": [
+                "cpu",
+                "cpu-sleep",
+                "allocation-worker",
+                "heavy-allocation-worker",
+                "lock-holder",
+                "dead-lock"
+            ],
+            "default": "cpu"
+        }
+    ]
+}

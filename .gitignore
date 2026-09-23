@@ -1,24 +1,35 @@
-# Compiled class file
+# Java build outputs
 *.class
+.build/
+bin/
+out/
+target/
+build/
 
-# Log file
+# Raw diagnostic artifacts: keep local, publish reviewed excerpts in docs instead.
+*.hprof
+*.hprof.*
+*.jfr
 *.log
+*.log.*
+hs_err_pid*
+replay_pid*
+/diagnostics/
+/*-samples.txt
+/*-events.txt
+/*-threads.txt
+/thread-dump*.txt
+/thread-lock.txt
+/histogram.txt
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
+# Archives and operating-system files
 *.zip
 *.tar.gz
 *.rar
+.DS_Store
+Thumbs.db
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Publish portable launch configurations, not machine-specific editor settings.
+/.vscode/*
+!/.vscode/launch.json
+!/.vscode/extensions.json
